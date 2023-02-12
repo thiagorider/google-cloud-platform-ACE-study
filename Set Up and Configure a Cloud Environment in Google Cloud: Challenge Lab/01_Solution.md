@@ -75,5 +75,36 @@ You can use the gcloud command to fast provision this VPC as in:
 
 `gcloud config set compute/zone us-east1-b`
 
-``
+`gcloud compute instances create griffin-bastion1 --machine-type=n1-standard-1 --network-interface=network-tier=PREMIUM,subnet=griffin-dev-mgmt --network-interface=network-tier=PREMIUM,subnet=griffin-prod-mgmt --create-disk=auto-delete=yes,boot=yes,device-name=instance-1,image=projects/debian-cloud/global/images/debian-11-bullseye-v20230206`
 
+`gcloud compute firewall-rules create griffin-dev-mgmt-vpc-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=griffin-dev-mgmt --action=ALLOW --rules=icmp,tcp:22,tcp:3389 --source-ranges=0.0.0.0/0`
+
+`gcloud compute firewall-rules create griffin-prod-mgmt-vpc-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=griffin-prod-mgmt --action=ALLOW --rules=icmp,tcp:22,tcp:3389 --source-ranges=0.0.0.0/0`
+
+### Task 4. Create and configure Cloud SQL Instance
+
+Requirements:
+
+1. Create a MySQL Cloud SQL Instance called griffin-dev-db in us-east1.
+
+2. Connect to the instance and run the following SQL commands to prepare the WordPress environment:
+
+``` SQL
+CREATE DATABASE wordpress;
+CREATE USER "wp_user"@"%" IDENTIFIED BY "stormwind_rules";
+GRANT ALL PRIVILEGES ON wordpress.* TO "wp_user"@"%";
+FLUSH PRIVILEGES;
+```
+
+These SQL statements create the worpdress database and create a user with access to the wordpress database.
+
+You will use the username and password in __task 6__.
+
+#### Steps:
+
+You can use the console to provision this SQL instance:
+![image](https://user-images.githubusercontent.com/5251806/218290366-c2253a79-5d23-4aae-9302-a9b8ce051068.png)
+
+`gcloud sql connect qwiklabs-demo --user=root --quiet`
+
+Apply SQL configurations.

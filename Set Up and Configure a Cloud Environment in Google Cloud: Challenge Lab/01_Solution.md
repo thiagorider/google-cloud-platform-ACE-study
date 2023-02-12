@@ -189,3 +189,19 @@ Replace `YOUR_SQL_INSTANCE` with __griffin-dev-db's Instance connection name__. 
 `kubectl create deployment -f wp-deployment.yaml`
 
 `kubectl create deployment -f wp-service.yaml`
+
+
+### Task 8. Enable monitoring
+
+* Create an uptime check for your WordPress development site.
+
+#### Steps:
+
+
+
+### Task 9. Provide access for an additional engineer
+
+* Create an uptime check for your WordPress development site.
+
+#### Steps:
+

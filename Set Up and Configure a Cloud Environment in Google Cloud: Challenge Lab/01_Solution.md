@@ -103,6 +103,7 @@ You will use the username and password in __task 6__.
 #### Steps:
 
 You can use the console to provision this SQL instance:
+
 ![image](https://user-images.githubusercontent.com/5251806/218290366-c2253a79-5d23-4aae-9302-a9b8ce051068.png)
 
 `gcloud sql connect qwiklabs-demo --user=root --quiet`

@@ -150,3 +150,42 @@ kubectl create secret generic cloudsql-instance-credentials \
 
 #### Steps:
 
+`gsutil -m cp -r gs://cloud-training/gsp321/wp-k8s .`
+
+`cd wp-k8s`
+
+`vim wp-env.yaml`
+
+change username and password to stormwind_rules
+
+`gcloud iam service-accounts keys create key.json \
+    --iam-account=cloud-sql-proxy@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com`
+    
+`kubectl create secret generic cloudsql-instance-credentials \
+    --from-file key.json`
+
+
+### Task 7. Create a WordPress deployment
+
+Now that you have provisioned the MySQL database, and set up the secrets and volume, you can create the deployment using `wp-deployment.yaml`.
+
+1. Before you create the deployment you need to edit wp-deployment.yaml.
+
+2. Replace YOUR_SQL_INSTANCE with griffin-dev-db's Instance connection name.
+
+3. Get the Instance connection name from your Cloud SQL instance.
+
+4. After you create your WordPress deployment, create the service with wp-service.yaml.
+
+5. Once the Load Balancer is created, you can visit the site and ensure you see the WordPress site installer.
+At this point the dev team will take over and complete the install and you move on to the next task.
+
+#### Steps:
+
+`vim wp-deployment.yaml`
+
+Replace `YOUR_SQL_INSTANCE` with __griffin-dev-db's Instance connection name__. (Get the Instance connection name from Cloud SQL instance)
+
+`kubectl create deployment -f wp-deployment.yaml`
+
+`kubectl create deployment -f wp-service.yaml`

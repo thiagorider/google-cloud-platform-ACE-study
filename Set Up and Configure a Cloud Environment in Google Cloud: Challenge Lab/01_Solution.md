@@ -38,6 +38,9 @@ You can use the gcloud command to fast provision this VPC as in:
 
 `gcloud compute networks subnets create griffin-dev-mgmt --network=griffin-dev-vpc --range=192.168.32.0/20`
 
+
+---
+
 ### Task 2. Create production VPC manually
 
 Requirements:
@@ -62,6 +65,8 @@ You can use the gcloud command to fast provision this VPC as in:
 `gcloud compute networks subnets create griffin-prod-mgmt --network=griffin-prod-vpc --range=192.168.64.0/20`
 
 
+---
+
 ### Task 3. Create bastion host
 
 Requirements:
@@ -80,6 +85,9 @@ You can use the gcloud command to fast provision this VPC as in:
 `gcloud compute firewall-rules create griffin-dev-mgmt-vpc-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=griffin-dev-mgmt --action=ALLOW --rules=icmp,tcp:22,tcp:3389 --source-ranges=0.0.0.0/0`
 
 `gcloud compute firewall-rules create griffin-prod-mgmt-vpc-allow-icmp-ssh-rdp --direction=INGRESS --priority=1000 --network=griffin-prod-mgmt --action=ALLOW --rules=icmp,tcp:22,tcp:3389 --source-ranges=0.0.0.0/0`
+
+
+---
 
 ### Task 4. Create and configure Cloud SQL Instance
 
@@ -111,6 +119,8 @@ You can use the console to provision this SQL instance:
 Apply SQL configurations.
 
 
+---
+
 ### Task 5. Create Kubernetes cluster
 
 * Create a 2 node cluster (n1-standard-4) called griffin-dev, in the griffin-dev-wp subnet, and in zone us-east1-b.
@@ -124,6 +134,9 @@ You can use the gcloud command to fast provision this cluster as in:
 `gcloud config set compute/zone us-east1-b`
 
 `gcloud container clusters create --machine-type=n1-standard-1 --num-nodes=2 griffin-dev`
+
+
+---
 
 ### Task 6. Prepare the Kubernetes cluster
 1. Use Cloud Shell and copy all files from gs://cloud-training/gsp321/wp-k8s.
@@ -147,7 +160,6 @@ kubectl create secret generic cloudsql-instance-credentials \
     --from-file key.json
 ```
 
-
 #### Steps:
 
 `gsutil -m cp -r gs://cloud-training/gsp321/wp-k8s .`
@@ -164,6 +176,8 @@ change username and password to stormwind_rules
 `kubectl create secret generic cloudsql-instance-credentials \
     --from-file key.json`
 
+
+---
 
 ### Task 7. Create a WordPress deployment
 
@@ -191,6 +205,8 @@ Replace `YOUR_SQL_INSTANCE` with __griffin-dev-db's Instance connection name__. 
 `kubectl create deployment -f wp-service.yaml`
 
 
+---
+
 ### Task 8. Enable monitoring
 
 * Create an uptime check for your WordPress development site.
@@ -198,6 +214,7 @@ Replace `YOUR_SQL_INSTANCE` with __griffin-dev-db's Instance connection name__. 
 #### Steps:
 
 
+---
 
 ### Task 9. Provide access for an additional engineer
 

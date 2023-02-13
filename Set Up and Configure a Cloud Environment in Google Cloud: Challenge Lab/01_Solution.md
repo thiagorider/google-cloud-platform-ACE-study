@@ -136,7 +136,7 @@ You can use the gcloud command to fast provision this cluster as in:
 
 `gcloud config set compute/zone us-east1-b`
 
-`gcloud container clusters create --machine-type=n1-standard-1 --num-nodes=2 griffin-dev --network=griffin-dev-vpc --subnetwork=griffin-dev-wp`
+`gcloud container clusters create --machine-type=n1-standard-4 --num-nodes=2 griffin-dev --network=griffin-dev-vpc --subnetwork=griffin-dev-wp`
 
 
 ---

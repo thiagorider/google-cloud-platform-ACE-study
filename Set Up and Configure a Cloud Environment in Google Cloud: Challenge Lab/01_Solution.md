@@ -171,10 +171,11 @@ kubectl create secret generic cloudsql-instance-credentials \
 
 `vim wp-env.yaml`
 
-change username and password to stormwind_rules
+change username and password in secret resource.
 
-`gcloud iam service-accounts keys create key.json \
-    --iam-account=cloud-sql-proxy@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com`
+`kubectl apply -f wp-env.yaml`
+
+`gcloud iam service-accounts keys create key.json --iam-account=cloud-sql-proxy@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com`
     
 `kubectl create secret generic cloudsql-instance-credentials \
     --from-file key.json`
@@ -203,9 +204,9 @@ At this point the dev team will take over and complete the install and you move 
 
 Replace `YOUR_SQL_INSTANCE` with __griffin-dev-db's Instance connection name__. (Get the Instance connection name from Cloud SQL instance)
 
-`kubectl create deployment -f wp-deployment.yaml`
+`kubectl apply -f wp-deployment.yaml`
 
-`kubectl create deployment -f wp-service.yaml`
+`kubectl apply -f wp-service.yaml`
 
 
 ---
